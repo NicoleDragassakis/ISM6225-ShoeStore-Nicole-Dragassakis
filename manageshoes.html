@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sole & Co. | Inventory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body data-page="manage">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="./index.html" class="brand" aria-label="Sole and Co home">
+          <span class="brand-mark">S</span>
+          <span>Sole &amp; Co.</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#collection">Shop / Manage Inventory</a>
+          <a href="./analytics.html">Analytics</a>
+          <a href="./aboutus.html">About Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container manage-page">
+      <section class="page-header">
+        <div>
+          <p class="eyebrow">Inventory dashboard</p>
+          <h1>Manage shoe inventory</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary" id="resetInventoryBtn" type="button">Reset Demo Inventory</button>
+          <button class="btn btn-primary" id="openAddModalBtn" type="button">Add New Shoe</button>
+        </div>
+      </section>
+
+      <div class="notice-bar">
+        <strong>Demo note:</strong> This simulated inventory management system uses browser localStorage instead of a live database.
+      </div>
+
+      <section class="stats-grid" id="inventoryStats"></section>
+
+      <section class="panel">
+        <div class="panel-header controls-header">
+          <h2>Inventory control</h2>
+          <div class="inventory-controls">
+            <input id="inventorySearch" type="search" placeholder="Search by name, brand, or ID" aria-label="Search inventory" />
+            <select id="inventoryCategoryFilter" aria-label="Filter inventory by category">
+              <option value="all">All categories</option>
+            </select>
+            <select id="inventorySort" aria-label="Sort inventory">
+              <option value="name-asc">Name A-Z</option>
+              <option value="price-asc">Price low to high</option>
+              <option value="price-desc">Price high to low</option>
+              <option value="stock-desc">Inventory high to low</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="inventoryAlert" class="alert" aria-live="polite"></div>
+
+        <div class="table-wrapper">
+          <table class="data-table inventory-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>ID</th>
+                <th>Shoe</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody"></tbody>
+          </table>
+        </div>
+        <div id="inventoryEmptyState" class="empty-state hidden">
+          <h3>No inventory available</h3>
+          <p>Add a new pair of shoes to begin tracking stock.</p>
+        </div>
+      </section>
+    </main>
+
+    <div id="productModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="productModalTitle">Add new shoe</h2>
+          <button class="modal-close" type="button" aria-label="Close modal" id="closeModalBtn">×</button>
+        </div>
+
+        <form id="shoeForm" novalidate>
+          <div class="form-grid">
+            <label>
+              Product ID
+              <input type="text" id="productId" name="productId" required />
+            </label>
+            <label>
+              Brand
+              <input type="text" id="brand" name="brand" required />
+            </label>
+            <label>
+              Shoe Name
+              <input type="text" id="shoeName" name="shoeName" required />
+            </label>
+            <label>
+              Category
+              <select id="category" name="category" required>
+                <option value="">Select category</option>
+                <option value="Running">Running</option>
+                <option value="Lifestyle">Lifestyle</option>
+                <option value="Basketball">Basketball</option>
+                <option value="Training">Training</option>
+                <option value="Casual">Casual</option>
+              </select>
+            </label>
+            <label>
+              Price
+              <input type="number" id="price" name="price" min="1" step="0.01" required />
+            </label>
+            <label>
+              Inventory Quantity
+              <input type="number" id="inventory" name="inventory" min="0" step="1" required />
+            </label>
+            <label class="full-width">
+              Sizes (comma separated)
+              <input type="text" id="sizes" name="sizes" placeholder="6, 7, 8, 9" required />
+            </label>
+            <label>
+              Color
+              <input type="text" id="color" name="color" required />
+            </label>
+            <label>
+              Image URL
+              <input type="url" id="imageUrl" name="imageUrl" required />
+            </label>
+            <label class="full-width">
+              Description
+              <textarea id="description" name="description" rows="4" required></textarea>
+            </label>
+          </div>
+          <div id="formErrors" class="form-errors" aria-live="polite"></div>
+          <div class="form-actions">
+            <button class="btn btn-secondary" type="button" id="cancelModalBtn">Cancel</button>
+            <button class="btn btn-primary" type="submit">Save Shoe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div>
+          <div class="brand brand-footer">
+            <span class="brand-mark">S</span>
+            <span>Sole &amp; Co.</span>
+          </div>
+          <p>Demo storefront for ISM 6225 Assignment 1.</p>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Home</a>
+          <a href="./analytics.html">Analytics</a>
+          <a href="./aboutus.html">About</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>

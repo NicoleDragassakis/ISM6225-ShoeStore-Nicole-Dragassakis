@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sole & Co. | Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body data-page="analytics">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="./index.html" class="brand" aria-label="Sole and Co home">
+          <span class="brand-mark">S</span>
+          <span>Sole &amp; Co.</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#collection">Shop / Manage Inventory</a>
+          <a href="./analytics.html" class="active">Analytics</a>
+          <a href="./aboutus.html">About Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container analytics-page">
+      <section class="page-header compact-header">
+        <div>
+          <p class="eyebrow">Analytics dashboard</p>
+          <h1>Inventory performance</h1>
+        </div>
+      </section>
+
+      <section class="stats-grid" id="analyticsStats"></section>
+
+      <section class="analytics-grid">
+        <div class="panel panel-chart large-panel">
+          <div class="panel-header">
+            <h2>Revenue potential by category</h2>
+          </div>
+          <canvas id="categoryRevenueChart"></canvas>
+        </div>
+        <div class="panel panel-chart">
+          <div class="panel-header">
+            <h2>Inventory mix</h2>
+          </div>
+          <canvas id="inventoryMixChart"></canvas>
+        </div>
+        <div class="panel panel-chart wide-panel">
+          <div class="panel-header">
+            <h2>Trend overview</h2>
+          </div>
+          <canvas id="salesTrendChart"></canvas>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Top selling roster</h2>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Units in stock</th>
+              </tr>
+            </thead>
+            <tbody id="topProductsTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div>
+          <div class="brand brand-footer">
+            <span class="brand-mark">S</span>
+            <span>Sole &amp; Co.</span>
+          </div>
+          <p>Demo storefront for ISM 6225 Assignment 1.</p>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Home</a>
+          <a href="./analytics.html">Analytics</a>
+          <a href="./aboutus.html">About</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
